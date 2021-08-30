@@ -13,14 +13,20 @@ import { styles } from "./styles";
 type Props = ModalProps & {
   children: ReactNode;
   closeModal: () => void;
+  height?: number | string;
 };
 
-export function ModalView({ children, closeModal, ...rest }: Props) {
+export function ModalView({
+  children,
+  closeModal,
+  height = 100,
+  ...rest
+}: Props) {
   return (
     <Modal transparent statusBarTranslucent animationType="slide" {...rest}>
       <TouchableWithoutFeedback onPress={closeModal}>
         <View style={styles.overlay}>
-          <View style={styles.container}>
+          <View style={[styles.container, { marginTop: height }]}>
             <Background>
               <View style={styles.bar} />
               {children}
